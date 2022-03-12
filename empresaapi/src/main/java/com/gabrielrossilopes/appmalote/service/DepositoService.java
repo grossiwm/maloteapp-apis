@@ -1,11 +1,14 @@
 package com.gabrielrossilopes.appmalote.service;
 
 import com.gabrielrossilopes.appmalote.model.dominio.Deposito;
+import com.gabrielrossilopes.appmalote.model.dominio.Pagamento;
 import com.gabrielrossilopes.appmalote.repository.DepositoRepository;
+import com.gabrielrossilopes.appmalote.repository.PagamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -14,21 +17,23 @@ public class DepositoService {
     @Autowired
     private DepositoRepository depositoRepository;
 
-    public List<Deposito> getAllDepositos() {
-        return depositoRepository.findAll().stream().filter(d -> d.getMalote() == null).collect(Collectors.toList());
+    public List<Deposito> getAll() {
+        return depositoRepository.findAll();
     }
 
-    public Deposito salvaDeposito(Deposito deposito) {
-        return depositoRepository.save(deposito);
+    public void remove(Deposito deposito) {
+        depositoRepository.delete(deposito);
     }
 
-    public Deposito buscaPorId(Long id) {
+    public Optional<Deposito> getOptionalById(Long id) {
+        return depositoRepository.findById(id);
+    }
+
+    public Deposito getById(Long id) {
         return depositoRepository.getById(id);
     }
 
-    public void removeDeMalote(Long depositoId) {
-        Deposito deposito = depositoRepository.getById(depositoId);
-        deposito.setMalote(null);
-        depositoRepository.save(deposito);
+    public Deposito cria(Deposito deposito) {
+        return depositoRepository.save(deposito);
     }
 }
