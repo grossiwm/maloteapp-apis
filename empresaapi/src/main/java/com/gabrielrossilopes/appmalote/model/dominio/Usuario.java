@@ -4,6 +4,7 @@ package com.gabrielrossilopes.appmalote.model.dominio;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name="usuario")
@@ -18,6 +19,9 @@ public class Usuario {
 
 	@Column
 	private String nome;
+
+	@OneToMany(mappedBy = "usuario", targetEntity = Malote.class, cascade = CascadeType.ALL)
+	private List<Malote> malotes;
 
 	public String getNome() {
 		return nome;
@@ -65,6 +69,18 @@ public class Usuario {
 		if (Objects.isNull(aceito))
 			return false;
 		return aceito;
+	}
+
+	public Usuario() {
+	}
+
+	public Usuario(String email, String nome, String senha, Boolean admin, Empresa empresa, Boolean aceito) {
+		this.email = email;
+		this.nome = nome;
+		this.senha = senha;
+		this.admin = admin;
+		this.empresa = empresa;
+		this.aceito = aceito;
 	}
 
 	public void setAceito(boolean aceito) {

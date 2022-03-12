@@ -16,15 +16,6 @@ public class Deposito extends Transacao {
 	@Column(name = "nome_beneficiario")
 	private String nomeBeneficiario;
 
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
-	public Long getId() {
-		return id;
-	}
-
 	public Malote getMalote() {
 		return malote;
 	}
@@ -40,9 +31,6 @@ public class Deposito extends Transacao {
 	public Deposito() {
 		super();
 
-	}
-	public void setId(Long id) {
-		this.id = id;
 	}
 	public void setStatus(TransacaoStatus status) {
 		this.status = status;
