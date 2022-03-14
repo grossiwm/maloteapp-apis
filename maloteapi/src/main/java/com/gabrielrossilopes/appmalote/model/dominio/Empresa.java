@@ -89,4 +89,10 @@ public class Empresa {
 		
 	}
 
+	public Empresa(String cnpj, String nome) {
+		this.cnpj = cnpj;
+		this.nome = nome;
+	}
+
+
 }

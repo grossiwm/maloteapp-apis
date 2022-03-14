@@ -2,10 +2,11 @@ package com.gabrielrossilopes.appmalote.model.dominio;
 
 import com.gabrielrossilopes.appmalote.exception.CpfInvalidoException;
 import com.gabrielrossilopes.appmalote.model.enums.TipoTransacao;
-import com.gabrielrossilopes.appmalote.model.enums.TransacaoStatus;
 import com.gabrielrossilopes.appmalote.utils.ValidationUtils;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import java.math.BigDecimal;
 
 @Entity(name = "deposito")
 public class Deposito extends Transacao {
@@ -16,26 +17,18 @@ public class Deposito extends Transacao {
 	@Column(name = "nome_beneficiario")
 	private String nomeBeneficiario;
 
-	public Malote getMalote() {
-		return malote;
-	}
-
-	public void setMalote(Malote malote) {
-		this.malote = malote;
-	}
-
-	@ManyToOne
-	@JoinColumn(name = "malote_id")
-	private Malote malote;
 	
 	public Deposito() {
 		super();
 
 	}
-	public void setStatus(TransacaoStatus status) {
-		this.status = status;
+
+	public Deposito(String cpfBeneficiario, String nomeBeneficiario, Malote malote, BigDecimal valor) {
+		super(valor, TipoTransacao.DEPOSITO, malote);
+		this.cpfBeneficiario = cpfBeneficiario;
+		this.nomeBeneficiario = nomeBeneficiario;
 	}
-	
+
 	public String getCpfBeneficiario() {
 		return cpfBeneficiario;
 	}

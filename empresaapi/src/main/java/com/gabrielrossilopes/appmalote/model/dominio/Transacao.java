@@ -1,7 +1,6 @@
 package com.gabrielrossilopes.appmalote.model.dominio;
 
 import com.gabrielrossilopes.appmalote.model.enums.TipoTransacao;
-import com.gabrielrossilopes.appmalote.model.enums.TransacaoStatus;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

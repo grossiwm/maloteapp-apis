@@ -1,15 +1,12 @@
 package com.gabrielrossilopes.appmalote.service;
 
 import com.gabrielrossilopes.appmalote.model.dominio.Deposito;
-import com.gabrielrossilopes.appmalote.model.dominio.Pagamento;
 import com.gabrielrossilopes.appmalote.repository.DepositoRepository;
-import com.gabrielrossilopes.appmalote.repository.PagamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class DepositoService {

@@ -1,37 +1,77 @@
 package com.gabrielrossilopes.appmalote.model.dominio;
 
 import com.gabrielrossilopes.appmalote.model.enums.TipoTransacao;
-import com.gabrielrossilopes.appmalote.model.enums.TransacaoStatus;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "transacao")
+@Table(name = "Transacao")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Transacao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	protected Integer id;
 
-	protected TransacaoStatus status;
-	
+	protected BigDecimal valor;
 
-	public Transacao() {
-		this.status = TransacaoStatus.PROCESSANDO;
+	protected TipoTransacao tipoTransacao;
+
+	@ManyToOne
+	@JoinColumn(name = "malote_id")
+	protected Malote malote;
+
+	public Malote getMalote() {
+		return malote;
 	}
 
+	public void setMalote(Malote malote) {
+		this.malote = malote;
+	}
 
-	public TransacaoStatus getStatus() {
-		return status;
+	protected Transacao() {
 	}
-	
-	@Override
-	public String toString() {
-		return new StringBuilder().append(";").append(status.name()).toString();
-		
+
+	public Transacao(BigDecimal valor, TipoTransacao tipoTransacao, Malote malote) {
+		this.malote = malote;
+		this.valor = valor;
+		this.tipoTransacao = tipoTransacao;
 	}
-	
-	public abstract TipoTransacao getTipoTransacao();
+
+	public Transacao(TipoTransacao tipoTransacao) {
+		this.tipoTransacao = tipoTransacao;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+
+	public TipoTransacao getTipoTransacao() {
+		return tipoTransacao;
+	}
+
+	public void setTipoTransacao(TipoTransacao tipoTransacao) {
+		this.tipoTransacao = tipoTransacao;
+	}
+//	@Override
+//	public String toString() {
+//		return new StringBuilder().append(";").append(status.name()).toString();
+//
+//	}
+//
+
 	
 }

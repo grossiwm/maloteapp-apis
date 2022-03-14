@@ -11,17 +11,15 @@ public class Malote {
 	
 	
 	
-	public Malote(Empresa empresa, LocalDateTime data) {
+	public Malote(Empresa empresa, Usuario usuario) {
+		this.usuario = usuario;
 		this.empresa = empresa;
-		this.transacoes = new ArrayList<Transacao>();
 		this.data = LocalDateTime.now();
 	}
 	
 	public Malote() {
-		this.transacoes = new ArrayList<Transacao>();
 		this.data = LocalDateTime.now();
 	}
-
 
 	@Id
 	@Column
@@ -32,49 +30,29 @@ public class Malote {
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
 
+	@ManyToOne
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuario;
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public void setTransacoes(List<Transacao> transacoes) {
 		this.transacoes = transacoes;
 	}
 
-	@OneToMany
-	@JoinColumn(name = "malote_id")
-	private List<Deposito> depositos;
-
-
-	@OneToMany
-	@JoinColumn(name = "malote_id")
-	private List<Pagamento> pagamentos;
-
-	public List<Deposito> getDepositos() {
-		return depositos;
+	public void setData(LocalDateTime data) {
+		this.data = data;
 	}
 
-	public void setDepositos(List<Deposito> depositos) {
-		this.depositos = depositos;
-	}
-
-	public List<Pagamento> getPagamentos() {
-		return pagamentos;
-	}
-
-	public void setPagamentos(List<Pagamento> pagamentos) {
-		this.pagamentos = pagamentos;
-	}
-
-	public List<Transferencia> getTransferencias() {
-		return transferencias;
-	}
-
-	public void setTransferencias(List<Transferencia> transferencias) {
-		this.transferencias = transferencias;
-	}
-
-	@OneToMany
-	@JoinColumn(name = "malote_id")
-	private List<Transferencia> transferencias;
-
-	@Transient
+	@OneToMany(mappedBy = "malote", targetEntity = Transacao.class)
 	private List<Transacao> transacoes;
+
 
 	@Column
 	private LocalDateTime data;

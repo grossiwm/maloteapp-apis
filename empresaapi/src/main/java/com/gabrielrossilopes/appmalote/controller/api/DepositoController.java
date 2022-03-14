@@ -1,9 +1,7 @@
 package com.gabrielrossilopes.appmalote.controller.api;
 
 import com.gabrielrossilopes.appmalote.model.dominio.Deposito;
-import com.gabrielrossilopes.appmalote.model.dominio.Pagamento;
 import com.gabrielrossilopes.appmalote.service.DepositoService;
-import com.gabrielrossilopes.appmalote.service.PagamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

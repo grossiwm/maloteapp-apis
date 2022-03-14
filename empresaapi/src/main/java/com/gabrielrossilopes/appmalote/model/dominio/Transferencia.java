@@ -2,10 +2,10 @@ package com.gabrielrossilopes.appmalote.model.dominio;
 
 import com.gabrielrossilopes.appmalote.exception.ContaInvalidaException;
 import com.gabrielrossilopes.appmalote.model.enums.TipoTransacao;
-import com.gabrielrossilopes.appmalote.model.enums.TransacaoStatus;
 import com.gabrielrossilopes.appmalote.utils.ValidationUtils;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import java.math.BigDecimal;
 
 @Entity(name="transferencia")
