@@ -1,5 +1,6 @@
 package com.gabrielrossilopes.appmalote.security;
 
+import com.gabrielrossilopes.appmalote.dto.UsuarioDTO;
 import com.gabrielrossilopes.appmalote.model.dominio.Usuario;
 import com.gabrielrossilopes.appmalote.service.UsuarioService;
 import com.gabrielrossilopes.appmalote.session.UsuarioLogadoSession;
@@ -33,14 +34,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String email = authentication.getName();
         String senha = authentication.getCredentials().toString();
 
-        Optional<Usuario> usuarioOp = usuarioService.getUsuarioByEmail(email);
+        Optional<UsuarioDTO> usuarioDTOOp = usuarioService.validar(new UsuarioDTO(email, senha));
 
-        if (usuarioOp.isEmpty())
+        if (usuarioDTOOp.isEmpty())
             throw new UsernameNotFoundException("Login e/ou Senha inválidos.");
 
-        Usuario usuario = usuarioOp.get();
+        UsuarioDTO usuarioDTO = usuarioDTOOp.get();
 
-        if (!usuario.getSenha().equals(senha))
+        if (!usuarioDTO.getSenha().equals(senha))
             throw new BadCredentialsException("Login e/ou Senha inválidos.");
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
@@ -50,11 +51,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         Authentication auth = new UsernamePasswordAuthenticationToken(springSecurityUser, senha, springSecurityUser.getAuthorities());
 
-        usuarioLogado.setId(usuario.getId());
-        usuarioLogado.setEmail(usuario.getEmail());
-        usuarioLogado.setAdmin(usuario.isAdmin());
-        usuarioLogado.setAceito(usuario.isAceito());
-        usuarioLogado.setNome(usuario.getNome());
+        usuarioLogado.setId(usuarioDTO.getId());
+        usuarioLogado.setEmail(usuarioDTO.getEmail());
+        usuarioLogado.setAdmin(usuarioDTO.isAdmin());
+        usuarioLogado.setNome(usuarioDTO.getNome());
 
         return auth;
 	}

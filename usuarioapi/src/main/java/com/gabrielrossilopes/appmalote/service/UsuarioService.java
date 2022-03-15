@@ -1,5 +1,6 @@
 package com.gabrielrossilopes.appmalote.service;
 
+import com.gabrielrossilopes.appmalote.dto.UsuarioDTO;
 import com.gabrielrossilopes.appmalote.model.dominio.Usuario;
 import com.gabrielrossilopes.appmalote.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,14 @@ public class UsuarioService {
 
     public void removeUsuario(Usuario usuario) {
         usuarioRepository.delete(usuario);
+    }
+
+    public Optional<UsuarioDTO> validar(UsuarioDTO usuarioDTO) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.autenticar(usuarioDTO.getEmail(), usuarioDTO.getSenha());
+        if (usuarioOptional.isEmpty())
+            return Optional.empty();
+        return Optional.of(UsuarioDTO.getUsuarioDTOdeUsuario(usuarioOptional.get()));
+
     }
 
 }

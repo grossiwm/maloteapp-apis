@@ -1,6 +1,7 @@
 package com.gabrielrossilopes.appmalote.model.dominio;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -21,14 +22,12 @@ public class Empresa {
     @Column
 	private String nome;
 
-	@JsonIgnore
-    @Transient
+	@OneToMany(mappedBy = "empresa", targetEntity = Malote.class)
+	@JsonManagedReference
 	private List<Malote> malotes;
 
-	@JsonIgnore
-    @OneToMany
-	@JoinColumn(name = "empresa_id")
-	@OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "empresa", targetEntity = Usuario.class)
+	@JsonManagedReference
 	private List<Usuario> usuarios; 
 
 	public Empresa() {

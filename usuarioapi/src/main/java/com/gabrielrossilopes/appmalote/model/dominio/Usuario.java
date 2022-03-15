@@ -1,6 +1,7 @@
 package com.gabrielrossilopes.appmalote.model.dominio;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -53,9 +54,9 @@ public class Usuario {
     @Column
     private Boolean admin;
 
-	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "empresa_id")
+	@JsonBackReference
     private Empresa empresa;
 
 	@Column

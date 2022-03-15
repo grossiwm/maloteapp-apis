@@ -2,6 +2,8 @@ package com.gabrielrossilopes.appmalote.dto;
 
 import com.gabrielrossilopes.appmalote.model.dominio.Usuario;
 
+import java.util.Objects;
+
 public class UsuarioDTO {
 
 	private Long id;
@@ -13,6 +15,16 @@ public class UsuarioDTO {
 	private Long empresa;
 
 	private String nome;
+
+	private boolean isAdmin;
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean admin) {
+		isAdmin = admin;
+	}
 
 	public String getNome() {
 		return nome;
@@ -54,7 +66,9 @@ public class UsuarioDTO {
 		this.id = id;
 	}
 
+
 	public static UsuarioDTO getUsuarioDTOdeUsuario(Usuario usuario) {
+
 		UsuarioDTO usuarioDTO = new UsuarioDTO();
 		usuarioDTO.setEmail(usuario.getEmail());
 		usuarioDTO.setEmpresa(usuario.getEmpresa().getId());
@@ -63,5 +77,13 @@ public class UsuarioDTO {
 		usuarioDTO.setNome(usuario.getNome());
 
 		return usuarioDTO;
+	}
+
+	public UsuarioDTO(String email, String senha) {
+		this.email = email;
+		this.senha = senha;
+	}
+
+	public UsuarioDTO() {
 	}
 }
