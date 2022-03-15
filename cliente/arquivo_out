@@ -1,0 +1,7 @@
+Malote criado na data 2011-11-11T14:09 pela empresa e-corp de cnpj 10.390.482/0001-97
+Transações:
+TRANSFERENCIA -> contaDestino:123 contaOrigem:321 
+TRANSFERENCIA -> contaDestino:777 contaOrigem:666 
+DEPOSITO -> cpfBeneficiario:853.638.030-62 nomeBeneficiario:Fulano 
+PAGAMENTO -> cnpjRecebedor:10.637.442/0001-05 
+PAGAMENTO -> cnpjRecebedor:35.779.202/0001-68 
