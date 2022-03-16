@@ -3,6 +3,7 @@ package com.gabrielrossilopes.appmalote.model.dominio;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,6 +23,7 @@ public class Usuario {
 	private String nome;
 
 	@OneToMany(mappedBy = "usuario", targetEntity = Malote.class, cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Malote> malotes;
 
 	public String getNome() {
@@ -56,7 +58,6 @@ public class Usuario {
 
 	@ManyToOne
     @JoinColumn(name = "empresa_id")
-	@JsonBackReference
     private Empresa empresa;
 
 	@Column

@@ -1,5 +1,7 @@
 package com.gabrielrossilopes.appmalote.model.dominio;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gabrielrossilopes.appmalote.model.enums.TipoTransacao;
 
 import javax.persistence.*;
@@ -20,6 +22,7 @@ public abstract class Transacao {
 
 	@ManyToOne
 	@JoinColumn(name = "malote_id")
+	@JsonBackReference(value = "transacao-malote")
 	protected Malote malote;
 
 	public Malote getMalote() {

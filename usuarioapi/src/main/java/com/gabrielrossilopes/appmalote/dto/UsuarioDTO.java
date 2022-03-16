@@ -75,6 +75,7 @@ public class UsuarioDTO {
 		usuarioDTO.setSenha(usuario.getSenha());
 		usuarioDTO.setId(usuario.getId());
 		usuarioDTO.setNome(usuario.getNome());
+		usuarioDTO.setAdmin(usuario.isAdmin());
 
 		return usuarioDTO;
 	}

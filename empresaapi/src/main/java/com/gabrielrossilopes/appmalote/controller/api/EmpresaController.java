@@ -21,13 +21,24 @@ public class EmpresaController {
         return ResponseEntity.ok().body(empresaService.buscaTodasOrdenado());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id){
+        Optional<Empresa> empresaOptional = empresaService.buscaPorId(id);
+        if (empresaOptional.isPresent())
+            return ResponseEntity.ok(empresaOptional.get());
+        return ResponseEntity.notFound().build();
+    }
+
     @PostMapping
-    ResponseEntity<?> incluir(@RequestBody Empresa empresa) {
-        EmpresaDTO empresaDTO = new EmpresaDTO();
-        empresaDTO.setNome(empresa.getNome());
-        empresaDTO.setCnpj(empresa.getCnpj());
-        empresaService.criaEmpresa(empresaDTO);
+    ResponseEntity<?> incluir(@RequestBody EmpresaDTO empresa) {
+        empresaService.criaEmpresa(empresa);
         return ResponseEntity.status(201).body(null);
+    }
+
+    @PatchMapping
+    ResponseEntity<?> alterar(@RequestBody EmpresaDTO empresa) {
+        empresaService.alterarEmpresa(empresa);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping(value = "/{id}")

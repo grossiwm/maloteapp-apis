@@ -46,11 +46,11 @@ public class DataLoader implements CommandLineRunner {
     private List<Usuario> addUsuarios(Empresa empresa) {
         List<Usuario> usuarios = new ArrayList<>();
         usuarios.add(new Usuario("admin@admin.com", "Elberth", "123", true, empresa, false));
-        usuarios.add(new Usuario("fulaninho@gmail.com", "Fulano", "123", true, empresa, false));
-        usuarios.add(new Usuario("rodrigo@gmail.com", "Rodrigo", "123", true, empresa, false));
-        usuarios.add(new Usuario("danielle@gmail.com", "Danielle", "123", true, empresa, false));
-        usuarios.add(new Usuario("beltrano@gmail.com", "Beltrano", "123", true, empresa, false));
-        usuarios.add(new Usuario("lenon@gmail.com", "Lenon", "123", true, empresa, false));
+        usuarios.add(new Usuario("fulaninho@gmail.com", "Fulano", "123", false, empresa, false));
+        usuarios.add(new Usuario("rodrigo@gmail.com", "Rodrigo", "123", false, empresa, false));
+        usuarios.add(new Usuario("danielle@gmail.com", "Danielle", "123", false, empresa, false));
+        usuarios.add(new Usuario("beltrano@gmail.com", "Beltrano", "123", false, empresa, false));
+        usuarios.add(new Usuario("lenon@gmail.com", "Lenon", "123", false, empresa, false));
         return usuarioRepository.saveAll(usuarios);
     }
 

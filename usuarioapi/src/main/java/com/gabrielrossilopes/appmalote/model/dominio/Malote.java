@@ -1,5 +1,9 @@
 package com.gabrielrossilopes.appmalote.model.dominio;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -28,6 +32,7 @@ public class Malote {
 
 	@ManyToOne
 	@JoinColumn(name = "empresa_id")
+	@JsonIgnore
 	private Empresa empresa;
 
 	@ManyToOne
@@ -51,6 +56,7 @@ public class Malote {
 	}
 
 	@OneToMany(mappedBy = "malote", targetEntity = Transacao.class)
+	@JsonManagedReference(value = "transacao-malote")
 	private List<Transacao> transacoes;
 
 
