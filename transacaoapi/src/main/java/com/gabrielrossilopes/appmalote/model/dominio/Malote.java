@@ -1,5 +1,7 @@
 package com.gabrielrossilopes.appmalote.model.dominio;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -28,10 +30,12 @@ public class Malote {
 
 	@ManyToOne
 	@JoinColumn(name = "empresa_id")
+	@JsonIgnore
 	private Empresa empresa;
 
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
+	@JsonIgnore
 	private Usuario usuario;
 
 	public Usuario getUsuario() {
@@ -51,6 +55,7 @@ public class Malote {
 	}
 
 	@OneToMany(mappedBy = "malote", targetEntity = Transacao.class)
+	@JsonIgnore
 	private List<Transacao> transacoes;
 
 

@@ -3,6 +3,7 @@ package com.gabrielrossilopes.appmalote.service;
 import com.gabrielrossilopes.appmalote.model.dominio.Transferencia;
 import com.gabrielrossilopes.appmalote.repository.TransferenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +16,11 @@ public class TransferenciaService {
     private TransferenciaRepository transferenciaRepository;
 
     public List<Transferencia> getAll() {
-        return transferenciaRepository.findAll();
+        return transferenciaRepository.findAll(Sort.by(Sort.Direction.ASC, "valor"));
+    }
+
+    public List<Transferencia> getAllByEmpresaId(Long id) {
+        return transferenciaRepository.findAll(Sort.by(Sort.Direction.ASC, "valor"), id);
     }
 
     public void remove(Transferencia transferencia) {
@@ -32,5 +37,17 @@ public class TransferenciaService {
 
     public Transferencia cria(Transferencia transferencia) {
         return transferenciaRepository.save(transferencia);
+    }
+
+    public Transferencia altera(Transferencia transferencia) {
+        Optional<Transferencia> transferenciaOptional = transferenciaRepository.findById(transferencia.getId());
+        return transferenciaRepository.save(atualizaTransferencia(transferenciaOptional.get(), transferencia));
+    }
+
+    private Transferencia atualizaTransferencia(Transferencia antigo, Transferencia novo) {
+        antigo.setValor(novo.getValor());
+        antigo.setContaOrigem(novo.getContaOrigem());
+        antigo.setContaDestino(novo.getContaDestino());
+        return antigo;
     }
 }

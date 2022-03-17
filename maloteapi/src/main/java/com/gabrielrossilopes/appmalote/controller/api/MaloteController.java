@@ -34,7 +34,11 @@ public class MaloteController {
         maloteService.excluir(maloteOptional.get());
         return ResponseEntity.noContent().build();
 
+    }
 
+    @GetMapping("/by-empresa/{id}")
+    public ResponseEntity<?> listarByEmpresa(@PathVariable Long id) {
+        return ResponseEntity.ok(maloteService.listarPorEmpresa(id));
     }
 
 }

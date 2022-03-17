@@ -1,5 +1,6 @@
 package com.gabrielrossilopes.appmalote.model.dominio;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gabrielrossilopes.appmalote.model.enums.TipoTransacao;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ public abstract class Transacao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected Integer id;
+	protected Long id;
 
 	protected BigDecimal valor;
 
@@ -43,11 +44,11 @@ public abstract class Transacao {
 		this.tipoTransacao = tipoTransacao;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

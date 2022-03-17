@@ -4,12 +4,11 @@ import com.gabrielrossilopes.appmalote.model.dominio.Transacao;
 import com.gabrielrossilopes.appmalote.service.TransacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/transacao")
 public class TransacaoController {
 

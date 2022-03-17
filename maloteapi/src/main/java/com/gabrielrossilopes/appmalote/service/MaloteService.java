@@ -35,6 +35,10 @@ public class MaloteService {
         return maloteRepository.findAll(usuarioId, Sort.by(Sort.Direction.ASC, "data"));
     }
 
+    public List<Malote> listarPorEmpresa(Long empresaId) {
+        return maloteRepository.findAllByEmpresa(empresaId, Sort.by(Sort.Direction.ASC, "data"));
+    }
+
     public void excluir(Malote malote) {
         maloteRepository.delete(malote);
     }

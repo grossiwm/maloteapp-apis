@@ -34,13 +34,22 @@ public class TransferenciaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscaPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(transferenciaService.getById(id));
+        Optional<Transferencia> transferenciaOptional = transferenciaService.getOptionalById(id);
+        return ResponseEntity.ok().body(transferenciaOptional.orElse(null));
     }
 
-    @PostMapping("/incluir")
+    @PostMapping
     public ResponseEntity<?> inclui(@RequestBody Transferencia transferencia) {
-        transferenciaService.cria(transferencia);
+        return ResponseEntity.ok(transferenciaService.cria(transferencia));
+    }
 
-        return ResponseEntity.ok().build();
+    @PatchMapping
+    public ResponseEntity<?> altera(@RequestBody Transferencia transferencia) {
+        return ResponseEntity.ok(transferenciaService.altera(transferencia));
+    }
+
+    @GetMapping("/by-empresa/{empresaId}")
+    public ResponseEntity<?> buscaPorEmpresa(@PathVariable Long empresaId) {
+        return ResponseEntity.ok(transferenciaService.getAllByEmpresaId(empresaId));
     }
 }

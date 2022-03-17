@@ -19,9 +19,7 @@ public class Transferencia extends Transacao {
 	public String getContaDestino() {
 		return contaDestino;
 	}
-	public void setContaDestino(String contaDestino) throws ContaInvalidaException {
-		if (!ValidationUtils.validaConta(contaDestino))
-			throw new ContaInvalidaException("Conta " + contaDestino + " inválida");
+	public void setContaDestino(String contaDestino) {
 			
 		this.contaDestino = contaDestino;
 	}
