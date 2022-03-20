@@ -15,4 +15,7 @@ public interface TransferenciaRepository extends JpaRepository<Transferencia, Lo
 
     @Query("from transferencia t where t.malote.empresa.id = :empresaId")
     List<Transferencia> findAll(Sort by, Long empresaId);
+
+    @Query("from transferencia t where t.malote.id = :maloteId")
+    List<Transferencia> findAllByMalote(Sort by, Long maloteId);
 }

@@ -23,6 +23,10 @@ public class TransferenciaService {
         return transferenciaRepository.findAll(Sort.by(Sort.Direction.ASC, "valor"), id);
     }
 
+    public List<Transferencia> getAllByMaloteId(Long id) {
+        return transferenciaRepository.findAllByMalote(Sort.by(Sort.Direction.ASC, "valor"), id);
+    }
+
     public void remove(Transferencia transferencia) {
         transferenciaRepository.delete(transferencia);
     }

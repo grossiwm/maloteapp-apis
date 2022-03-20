@@ -23,6 +23,25 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario", targetEntity = Malote.class, cascade = CascadeType.ALL)
 	private List<Malote> malotes;
 
+	@Transient
+	private int quantidadeMalotes;
+
+	public List<Malote> getMalotes() {
+		return malotes;
+	}
+
+	public void setMalotes(List<Malote> malotes) {
+		this.malotes = malotes;
+	}
+
+	public int getQuantidadeMalotes() {
+		return malotes.size();
+	}
+
+	public void setQuantidadeMalotes(int quantidadeMalotes) {
+		this.quantidadeMalotes = quantidadeMalotes;
+	}
+
 	public String getNome() {
 		return nome;
 	}

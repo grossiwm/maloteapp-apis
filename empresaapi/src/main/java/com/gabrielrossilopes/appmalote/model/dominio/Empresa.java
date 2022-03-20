@@ -25,6 +25,17 @@ public class Empresa {
     @Transient
 	private List<Malote> malotes;
 
+	@Transient
+	private int quantidadeMalotes;
+
+	public int getQuantidadeMalotes() {
+		return usuarios.stream().map(Usuario::getQuantidadeMalotes).reduce(0, Integer::sum);
+	}
+
+	public void setQuantidadeMalotes(int quantidadeMalotes) {
+		this.quantidadeMalotes = quantidadeMalotes;
+	}
+
 	@JsonIgnore
     @OneToMany
 	@JoinColumn(name = "empresa_id")

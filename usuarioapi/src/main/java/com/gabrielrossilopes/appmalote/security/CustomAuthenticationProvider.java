@@ -1,7 +1,6 @@
 package com.gabrielrossilopes.appmalote.security;
 
 import com.gabrielrossilopes.appmalote.dto.UsuarioDTO;
-import com.gabrielrossilopes.appmalote.model.dominio.Usuario;
 import com.gabrielrossilopes.appmalote.service.UsuarioService;
 import com.gabrielrossilopes.appmalote.session.UsuarioLogadoSession;
 import org.springframework.beans.factory.annotation.Autowired;

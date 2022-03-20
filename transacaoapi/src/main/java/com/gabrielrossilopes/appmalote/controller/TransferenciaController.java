@@ -52,4 +52,9 @@ public class TransferenciaController {
     public ResponseEntity<?> buscaPorEmpresa(@PathVariable Long empresaId) {
         return ResponseEntity.ok(transferenciaService.getAllByEmpresaId(empresaId));
     }
+
+    @GetMapping("/by-malote/{maloteId}")
+    public ResponseEntity<?> buscaPorMalote(@PathVariable Long maloteId) {
+        return ResponseEntity.ok(transferenciaService.getAllByMaloteId(maloteId));
+    }
 }

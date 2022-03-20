@@ -4,6 +4,7 @@ import com.gabrielrossilopes.appmalote.dto.EmpresaDTO;
 import com.gabrielrossilopes.appmalote.model.dominio.Empresa;
 import com.gabrielrossilopes.appmalote.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,8 +47,13 @@ public class EmpresaController {
         Optional<Empresa> empresaOptional = empresaService.buscaPorId(id);
 
         if (empresaOptional.isPresent()) {
-            empresaService.removeEmpresa(empresaOptional.get());
-            return ResponseEntity.noContent().build();
+            try {
+                empresaService.removeEmpresa(empresaOptional.get());
+                return ResponseEntity.noContent().build();
+            } catch (DataIntegrityViolationException e) {
+                return ResponseEntity.status(418).build();
+            }
+
         }
 
         return ResponseEntity.notFound().build();

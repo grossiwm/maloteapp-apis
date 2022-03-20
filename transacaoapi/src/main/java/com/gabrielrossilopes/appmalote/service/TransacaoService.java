@@ -3,6 +3,7 @@ package com.gabrielrossilopes.appmalote.service;
 import com.gabrielrossilopes.appmalote.model.dominio.Transacao;
 import com.gabrielrossilopes.appmalote.repository.TransacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,5 +37,9 @@ public class TransacaoService {
 
     public void criar(Transacao transacao) {
         transacaoRepository.save(transacao);
+    }
+
+    public List<Transacao> getAllByEmpresaId(Long id) {
+        return transacaoRepository.findAll(Sort.by(Sort.Direction.ASC, "valor"), id);
     }
 }

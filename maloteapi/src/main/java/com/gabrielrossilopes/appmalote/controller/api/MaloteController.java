@@ -3,6 +3,7 @@ package com.gabrielrossilopes.appmalote.controller.api;
 import com.gabrielrossilopes.appmalote.model.dominio.Malote;
 import com.gabrielrossilopes.appmalote.service.MaloteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class MaloteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscar(@PathVariable Long id) {
-        return ResponseEntity.ok(maloteService.getById(id));
+        return ResponseEntity.ok(maloteService.getOptionalById(id).orElse(null));
     }
 
     @DeleteMapping("/{id}")
@@ -30,15 +31,23 @@ public class MaloteController {
         Optional<Malote> maloteOptional = maloteService.getOptionalById(id);
         if (maloteOptional.isEmpty())
             return ResponseEntity.notFound().build();
-
-        maloteService.excluir(maloteOptional.get());
-        return ResponseEntity.noContent().build();
+        try {
+            maloteService.excluir(maloteOptional.get());
+            return ResponseEntity.noContent().build();
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(418).build();
+        }
 
     }
 
     @GetMapping("/by-empresa/{id}")
     public ResponseEntity<?> listarByEmpresa(@PathVariable Long id) {
         return ResponseEntity.ok(maloteService.listarPorEmpresa(id));
+    }
+
+    @GetMapping("/by-usuario/{id}")
+    public ResponseEntity<?> listarByUsuario(@PathVariable Long id) {
+        return ResponseEntity.ok(maloteService.listarPorUsuario(id));
     }
 
 }

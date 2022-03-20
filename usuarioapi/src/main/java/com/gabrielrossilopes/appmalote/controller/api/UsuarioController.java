@@ -4,6 +4,7 @@ import com.gabrielrossilopes.appmalote.dto.UsuarioDTO;
 import com.gabrielrossilopes.appmalote.model.dominio.Usuario;
 import com.gabrielrossilopes.appmalote.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,8 +42,12 @@ public class UsuarioController {
         Optional<Usuario> usuarioOptional = usuarioService.getUsuarioById(id);
 
         if (usuarioOptional.isPresent()) {
-            usuarioService.removeUsuario(usuarioOptional.get());
-            return ResponseEntity.noContent().build();
+            try {
+                usuarioService.removeUsuario(usuarioOptional.get());
+                return ResponseEntity.noContent().build();
+            } catch (DataIntegrityViolationException e) {
+                return ResponseEntity.status(418).build();
+            }
         }
 
         return ResponseEntity.notFound().build();

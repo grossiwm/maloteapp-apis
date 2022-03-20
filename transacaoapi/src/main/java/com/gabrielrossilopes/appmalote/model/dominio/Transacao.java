@@ -1,13 +1,11 @@
 package com.gabrielrossilopes.appmalote.model.dominio;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gabrielrossilopes.appmalote.model.enums.TipoTransacao;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "Transacao")
+@Entity(name = "transacao")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Transacao {
 

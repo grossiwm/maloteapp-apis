@@ -1,8 +1,6 @@
 package com.gabrielrossilopes.appmalote.model.dominio;
 
-import com.gabrielrossilopes.appmalote.exception.CpfInvalidoException;
 import com.gabrielrossilopes.appmalote.model.enums.TipoTransacao;
-import com.gabrielrossilopes.appmalote.utils.ValidationUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,9 +30,7 @@ public class Deposito extends Transacao {
 	public String getCpfBeneficiario() {
 		return cpfBeneficiario;
 	}
-	public void setCpfBeneficiario(String cpfBeneficiario) throws CpfInvalidoException {
-		if (!ValidationUtils.validaCPF(cpfBeneficiario))
-			throw new CpfInvalidoException("Cpf " + cpfBeneficiario + " inválido");
+	public void setCpfBeneficiario(String cpfBeneficiario) {
 		
 		this.cpfBeneficiario = cpfBeneficiario;
 	}

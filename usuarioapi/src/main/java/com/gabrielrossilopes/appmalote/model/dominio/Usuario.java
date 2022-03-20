@@ -1,9 +1,7 @@
 package com.gabrielrossilopes.appmalote.model.dominio;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -71,6 +69,25 @@ public class Usuario {
 		if (Objects.isNull(aceito))
 			return false;
 		return aceito;
+	}
+
+	@Transient
+	private int quantidadeMalotes;
+
+	public List<Malote> getMalotes() {
+		return malotes;
+	}
+
+	public void setMalotes(List<Malote> malotes) {
+		this.malotes = malotes;
+	}
+
+	public int getQuantidadeMalotes() {
+		return this.malotes.size();
+	}
+
+	public void setQuantidadeMalotes(int quantidadeMalotes) {
+		this.quantidadeMalotes = quantidadeMalotes;
 	}
 
 	public Usuario() {

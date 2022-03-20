@@ -34,13 +34,26 @@ public class DepositoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscaPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(depositoService.getById(id));
+        return ResponseEntity.ok(depositoService.getOptionalById(id).orElse(null));
     }
 
-    @PostMapping("/incluir")
+    @PostMapping
     public ResponseEntity<?> inclui(@RequestBody Deposito deposito) {
-        depositoService.cria(deposito);
+        return ResponseEntity.ok(depositoService.cria(deposito));
+    }
 
-        return ResponseEntity.ok().build();
+    @PatchMapping
+    public ResponseEntity<?> altera(@RequestBody Deposito deposito) {
+        return ResponseEntity.ok(depositoService.altera(deposito));
+    }
+
+    @GetMapping("/by-empresa/{empresaId}")
+    public ResponseEntity<?> buscaPorEmpresa(@PathVariable Long empresaId) {
+        return ResponseEntity.ok(depositoService.getAllByEmpresaId(empresaId));
+    }
+
+    @GetMapping("/by-malote/{maloteId}")
+    public ResponseEntity<?> buscaPorMalote(@PathVariable Long maloteId) {
+        return ResponseEntity.ok(depositoService.getAllByMaloteId(maloteId));
     }
 }

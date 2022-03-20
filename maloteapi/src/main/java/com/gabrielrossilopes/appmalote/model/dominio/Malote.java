@@ -1,5 +1,7 @@
 package com.gabrielrossilopes.appmalote.model.dominio;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -51,6 +53,7 @@ public class Malote {
 	}
 
 	@OneToMany(mappedBy = "malote", targetEntity = Transacao.class)
+	@JsonIgnore
 	private List<Transacao> transacoes;
 
 

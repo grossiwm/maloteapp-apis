@@ -48,4 +48,9 @@ public class TransacaoController {
 
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/by-empresa/{empresaId}")
+    public ResponseEntity<?> buscaPorEmpresa(@PathVariable Long empresaId) {
+        return ResponseEntity.ok(transacaoService.getAllByEmpresaId(empresaId));
+    }
 }

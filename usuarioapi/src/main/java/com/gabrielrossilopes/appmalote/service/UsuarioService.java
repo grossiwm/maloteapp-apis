@@ -4,6 +4,7 @@ import com.gabrielrossilopes.appmalote.dto.UsuarioDTO;
 import com.gabrielrossilopes.appmalote.model.dominio.Usuario;
 import com.gabrielrossilopes.appmalote.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class UsuarioService {
     }
     
     public List<Usuario> busucaTodos() {
-    	return usuarioRepository.findAll();
+    	return usuarioRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
     }
 
     public void aceitarUsuario(long id) {

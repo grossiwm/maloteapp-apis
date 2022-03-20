@@ -2,8 +2,6 @@ package com.gabrielrossilopes.appmalote.dto;
 
 import com.gabrielrossilopes.appmalote.model.dominio.Usuario;
 
-import java.util.Objects;
-
 public class UsuarioDTO {
 
 	private Long id;

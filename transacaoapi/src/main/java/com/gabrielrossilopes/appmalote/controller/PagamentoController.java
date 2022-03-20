@@ -35,13 +35,28 @@ public class PagamentoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscaPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(pagamentoService.getById(id));
+        return ResponseEntity.ok(pagamentoService.getOptionalById(id).orElse(null));
     }
 
-    @PostMapping("/incluir")
+    @PostMapping
     public ResponseEntity<?> inclui(@RequestBody Pagamento pagamento) {
         pagamentoService.cria(pagamento);
 
         return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping
+    public ResponseEntity<?> altera(@RequestBody Pagamento pagamento) {
+        return ResponseEntity.ok(pagamentoService.altera(pagamento));
+    }
+
+    @GetMapping("/by-empresa/{empresaId}")
+    public ResponseEntity<?> buscaPorEmpresa(@PathVariable Long empresaId) {
+        return ResponseEntity.ok(pagamentoService.getAllByEmpresaId(empresaId));
+    }
+
+    @GetMapping("/by-malote/{maloteId}")
+    public ResponseEntity<?> buscaPorMalote(@PathVariable Long maloteId) {
+        return ResponseEntity.ok(pagamentoService.getAllByMaloteId(maloteId));
     }
 }
