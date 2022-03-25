@@ -83,6 +83,8 @@ public class Usuario {
 	}
 
 	public int getQuantidadeMalotes() {
+		if (malotes == null)
+			return 0;
 		return this.malotes.size();
 	}
 

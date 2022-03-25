@@ -37,7 +37,7 @@ public class DataLoader implements CommandLineRunner {
 
         List<Empresa> empresas = addEmpresas();
         List<Usuario> usuarios = addUsuarios(empresas.get(0));
-        List<Malote> malotes = addMalotes(empresas.get(0), usuarios.get(0));
+        List<Malote> malotes = addMalotes(empresas.get(0), usuarios.get(1));
         addDepositos(malotes.get(0));
         addPagamentos(malotes.get(0));
         addTransferencia(malotes.get(0));
