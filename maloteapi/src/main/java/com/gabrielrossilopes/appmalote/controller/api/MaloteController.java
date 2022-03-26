@@ -40,6 +40,11 @@ public class MaloteController {
 
     }
 
+    @PostMapping
+    public ResponseEntity<?> incluir(@RequestBody Malote malote) {
+        return ResponseEntity.ok(maloteService.salvaMalote(malote));
+    }
+
     @GetMapping("/by-empresa/{id}")
     public ResponseEntity<?> listarByEmpresa(@PathVariable Long id) {
         return ResponseEntity.ok(maloteService.listarPorEmpresa(id));
